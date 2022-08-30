@@ -192,12 +192,12 @@ pub enum Token<'a> {
     // Other
     #[regex(r"[\\/]+")]
     Integer(&'a str),
-    #[regex("\"[\\w\\d]\"")]
+    #[regex(r#""((\\")|[^"])*""#)]
     String(&'a str),
+    #[regex(r"[\w\d_]+", priority=1)]
+    Indentifier(&'a str),
     #[regex(r"[\n\t ]+")]
     Whitespace,
-    #[regex(r"[\w\d_]+")]
-    Variable(&'a str),
 
     // Misc
     #[error]
